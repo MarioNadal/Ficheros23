@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Ejercicio3 {
     public static void leerFichero(){
         //Path p1 = Path.of("src/resources/ejercicio3.txt");
-        String ruta = libs.Leer.introduceString();
+        String ruta = libs.Leer.introduceString("Introduce la ruta: ");
         Path p1 = Path.of(ruta);
         if(Files.exists(p1)){
             if(p1.toString().endsWith(".txt")){

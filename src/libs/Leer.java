@@ -14,20 +14,20 @@ public class Leer {
         //introduceString();
     }
 
-    public static int introduceEntero() {
+    public static int introduceEntero(String texto) {
         Scanner sc = new Scanner(System.in);
         boolean continuar = false;
-        System.out.println("Introduce un número: ");
+        System.out.println(texto);
         int num = 0;
-        do{
-            try{
+        do {
+            try {
                 num = sc.nextInt();
-                continuar=true;
-            }catch(InputMismatchException ex){
+                continuar = true;
+            } catch (InputMismatchException ex) {
                 System.out.println("Debes introducir números enteros");
                 sc.next();
             }
-        }while(!continuar);
+        } while (!continuar);
         return num;
     }
     public static double introduceDouble() {
@@ -77,9 +77,9 @@ public class Leer {
         }while(!continuar);
         return palabra;
     }
-    public static String introduceString() {
+    public static String introduceString(String texto) {
         Scanner sc = new Scanner(System.in);
-        String palabra = sc.next();
-        return palabra;
+        System.out.println(texto);
+        return sc.nextLine();
     }
 }
