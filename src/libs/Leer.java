@@ -11,6 +11,7 @@ public class Leer {
         //introduceDouble();
         //introduceLetra();
         //introducePalabra();
+        //introduceString();
     }
 
     public static int introduceEntero() {
@@ -20,7 +21,7 @@ public class Leer {
         int num = 0;
         do{
             try{
-                num= sc.nextInt();
+                num = sc.nextInt();
                 continuar=true;
             }catch(InputMismatchException ex){
                 System.out.println("Debes introducir números enteros");
@@ -64,7 +65,6 @@ public class Leer {
     public static String introducePalabra() {
         Scanner sc= new Scanner(System.in);
         boolean continuar = false;
-        System.out.println("Introduce una letra:");
         String palabra = null;
         do{
             try{
@@ -76,5 +76,10 @@ public class Leer {
             }
         }while(!continuar);
         return palabra;
-    } 
+    }
+    public static String introduceString() {
+        Scanner sc = new Scanner(System.in);
+        String palabra = sc.next();
+        return palabra;
+    }
 }
