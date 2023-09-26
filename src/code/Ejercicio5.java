@@ -4,16 +4,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class Ejercicio4 {
-    public static void escribirFicheros() throws IOException {
+public class Ejercicio5 {
+    public static void escribirFicherosTextoGuardado() throws IOException {
         Path p1 = Path.of("src/resources/ejercicio4.txt");
         String frase;
         StringBuilder guardarLineas = new StringBuilder();
         if(Files.exists(p1)){
             if(p1.toString().endsWith(".txt")){
                 if(Files.isWritable(p1)){
-                    Files.delete(p1);
-                    Files.createFile(p1);
+                    guardarLineas.append(Files.readAllLines(p1));
                     do {
                         frase = libs.Leer.introduceString("Introduce una frase: ");
                         try{
