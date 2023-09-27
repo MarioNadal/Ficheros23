@@ -13,13 +13,17 @@ public class Main {
                 System.out.println("5. Ejercicio BackUp");
                 System.out.println("6. Ejercicio3 leer ficheros");
                 System.out.println("7. Ejercicio 4 escribir ficheros");
-                System.out.println("8. Ejercicio 4 escribir ficheros con texto guardado");
+                System.out.println("8. Ejercicio 5 escribir ficheros con texto guardado");
+                System.out.println("9. Ejercicio 6 hacer back up del fichero");
+                System.out.println("10. Ejercicio 10");
                 System.out.println("0. Salir");
                 System.out.println(guiones);
                 menu = libs.Leer.introduceEntero("Introduce el número del menú: ");
                 System.out.println(guiones);
 
             switch (menu) {
+                case 10 -> code.Ejercicio10.leerContenido();
+                case 9 -> code.Ejercicio6.backUpFichero();
                 case 8 -> code.Ejercicio5.escribirFicherosTextoGuardado();
                 case 7 -> code.Ejercicio4.escribirFicheros();
                 case 6 -> code.Ejercicio3.leerFichero();
