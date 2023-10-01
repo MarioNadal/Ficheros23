@@ -1,12 +1,10 @@
 package code;
 
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.stream.Stream;
 
 public class BackUp {
     public static void backUpDirectory() throws IOException {
@@ -15,7 +13,6 @@ public class BackUp {
         String fechaBuena = formateo.format(fecha);
         Path p1 = Path.of("src/resources/dirBackup");
         Path p2 = Path.of("src/resources/dtnBackup");
-        //TODO MIRAR PORQUE NO VA EL BORRAR LA CARPETA
         Path pBI = Files.createDirectory(Path.of("src/resources/BuInc" + fechaBuena));
         menu(p1,p2, pBI);
     }
@@ -26,7 +23,7 @@ public class BackUp {
         System.out.println("3.Salir");
         int menu = libs.Leer.introduceEntero("Introduce número del menu");
         switch(menu){
-            case 1 -> backUpCompeto(p1,p2);
+            case 1 -> backUpCompeto(p1,p2, pBI);
             case 2 -> backUpIncremental(p1, p2, pBI);
             case 0 -> System.out.println();
             default -> System.out.println("Número introducido no está en el menu");
@@ -68,9 +65,6 @@ public class BackUp {
                     }catch(SecurityException ex){
                         System.out.println("No tiene permisos para leer este directorio");
                     }
-                    if(Files.size(pBI)==0){
-                        Files.delete(pBI);
-                    }
                     System.out.println("Back Up completado");
                 }else{
                     System.out.println("No se puede escribir en la carpeta de destino");
@@ -81,9 +75,24 @@ public class BackUp {
         }else{
             System.out.println("Esta ruta no contiene un directorio existente");
         }
+        if(directorioVacio(pBI)){
+            Files.delete(pBI);
+        }
     }
 
-    private static void backUpCompeto(Path p1, Path p2) throws IOException {
+    private static boolean directorioVacio(Path pBI) {
+        /*Recorremos el Path a borrar con Files.list y hacemos que se guarde en stream para poder contar
+        si hay contenido dentro o no*/
+        try (Stream<Path> stream = Files.list(Paths.get(String.valueOf(pBI)))) {
+            return stream.count() == 0;
+        } catch (IOException e) {
+            System.out.println("No se puede leer el directorio");
+            return false;
+        }
+    }
+
+    private static void backUpCompeto(Path p1, Path p2, Path pBI) throws IOException {
+        Files.delete(pBI);
         if(Files.exists(p1)){
             //Comprbamos que es un directorio
             if(Files.isDirectory(p1)){
